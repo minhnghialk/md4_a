@@ -1,0 +1,1 @@
+.user_loading{position:fixed;top:0;left:0;background-color:rgba(0,0,0,0);width:100%;height:100vh;z-index:10}.btn_submit{background-color:red;position:relative}.btn_submit .btn_loading{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);display:none}.btn_submit.active{background-color:rgba(255,0,0,.2)}.btn_submit.active .btn_loading{display:block}
