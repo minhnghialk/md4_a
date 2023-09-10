@@ -49,7 +49,7 @@ export default function DropDown() {
         <Select
             labelInValue
             defaultValue={{ value: 'language', label: 'Chọn ngôn ngữ' }}
-            style={{ width: 150, position: 'absolute', bottom: '70%', right: '0'}}
+            style={{ width: 150, position: 'absolute', right: '100px', top: '0'}}
             onChange={(e) => {changeLanguage(e)}}
             onSelect={handleOptionClick}
         >
@@ -57,74 +57,14 @@ export default function DropDown() {
                 Chọn ngôn ngữ
             </Select.Option>
             <Select.Option value="vi" label="Tiếng Việt" onClick={() => {changeLanguage('vi')}}>
-                Tiếng Việt
+                🇻🇳 Tiếng Việt
             </Select.Option>
             <Select.Option value="en" label="Tiếng Anh" onClick={() => {changeLanguage('en')}}>
-                Tiếng Anh
+                🇬🇧 Tiếng Anh
             </Select.Option>
         </Select>
 
     )
 }
-
-// import React from 'react';
-// import { Select } from 'antd';
-
-// const handleChange = (value: { value: string; label: React.ReactNode }) => {
-//   console.log(value); 
-// };
-
-// const App: React.FC = () => (
-//   <Select
-//     labelInValue
-//     defaultValue={{ value: 'vi', label: 'Tiếng Việt' }}
-//     style={{ width: 120 }}
-//     onChange={handleChange}
-//     options={[
-//       {
-//         value: 'vi',
-//         label: 'Tiếng Việt',
-    
-//       },
-//       {
-//         value: 'en',
-//         label: 'Tiếng Anh',
-//       },
-//     ]}
-//   />
-// );
-
-// export default App;
-
-// import React from 'react';
-// import { Select } from 'antd';
-// import { changeLanguage } from 'i18next';
-
-// const handleChange = (value: any) => {
-//   console.log(value);
-// };
-
-// const handleOptionClick = (value: { label: any; }) => {
-//   console.log(`Clicked on ${value.label}`);
-// };
-
-// const App: React.FC = () => (
-//   <Select
-//     labelInValue
-//     defaultValue={{ value: 'vi', label: 'Tiếng Việt' }}
-//     style={{ width: 120 }}
-//     onChange={handleChange}
-//     onSelect={handleOptionClick}
-//   >
-//     <Select.Option value="vi" label="Tiếng Việt" onClick={() => {changeLanguage('vi')}}>
-//         Tiếng Việt
-//     </Select.Option>
-//     <Select.Option value="en" label="Tiếng Anh" onClick={() => {changeLanguage('en')}}>
-//         Tiếng Anh
-//     </Select.Option>
-//   </Select>
-// );
-
-// export default App;
 
 

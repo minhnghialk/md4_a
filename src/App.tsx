@@ -27,7 +27,7 @@ function App() {
   }, [])
   return (
     <>
-    <h1>User is login: {store.userStore.data?.firstName} {store.userStore.data?.lastName}</h1>
+    {/* <h1>User is login: {store.userStore.data?.firstName} {store.userStore.data?.lastName}</h1> */}
       {/* Routing */}
       <RouteSetup/>
     </>

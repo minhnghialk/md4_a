@@ -1,11 +1,11 @@
-import React, { memo, FormEvent, useState } from 'react'
+import { memo, FormEvent, useState } from 'react'
 import './user.scss'
 import api from '@/services/apis'
 import DropDown from '@components/DropDown'
 import { useTranslation } from 'react-i18next'
 import Loading from '@components/Loading'
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin, message, Modal } from 'antd';
+import { Spin, Modal } from 'antd';
 
 
 const Login = () =>{
@@ -24,7 +24,18 @@ const Login = () =>{
 
   async function login(event: FormEvent) {
     event.preventDefault();
+  let userName = (event.target as any).userName.value
+  let password = (event.target as any).password.value
 
+  if (userName == '' && password == '') {
+    alert('Please fill all fields');
+  }
+  if (userName.length < 3) {
+    alert('User Name must be 3 character or more')
+  }
+  if (password.length < 6) {
+    alert('Password must be 6 character or more')
+  }
     if(load) return
 
     let data = {
@@ -52,7 +63,7 @@ const Login = () =>{
                 })
             }
         })
-        .catch(err => {
+        .catch(_err => {
             Modal.success({
                 content: "Sập server!",
                 okText: "thử lại"
@@ -73,15 +84,16 @@ const Login = () =>{
     >
       <img
         className="w-8 h-8 mr-2"
-        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+        src="https://ruoutaychinhhang.com/userfiles/images/logo.png"
         alt="logo"
+        style={{width: '300px'}}
       />
-      ABC Store
+      {/* ABC Store */}
     </a>
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-        {t('createYourAccount')}
+        {t('loginYourAccount')}
         </h1>
         <form className="space-y-4 md:space-y-6" action="#" onSubmit={(e) => {login(e)}}>
         <div>
@@ -89,7 +101,7 @@ const Login = () =>{
               htmlFor="text"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              User name
+              {t('userName')}
             </label>
             <input
               type="text"
@@ -103,7 +115,7 @@ const Login = () =>{
               htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Password
+              {t('passWord')}
             </label>
             <input
               type="password"
@@ -127,14 +139,17 @@ const Login = () =>{
                 htmlFor="terms"
                 className="font-light text-gray-500 dark:text-gray-300"
               >
-                I accept the{" "}
-                <a
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  href="#"
-                >
-                  Terms and Conditions
-                </a>
+                {t('rememberMe')}{" "}
+                
               </label>
+              {/* <br></br> */}
+              <a
+              href="#"
+              className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+              style={{marginLeft: '100px'}}
+            >
+              {t('forgotPassword')}?
+            </a>
             </div>
           </div>
           {
@@ -146,18 +161,18 @@ const Login = () =>{
             className="{`${load && 'active'} btn_submit w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             // style = {{backgroundColor: "blue"}}
           >
-            Create an account
+            {t('login')}
             <div className='btn_loading'>
               <Spin indicator={antIcon} />
             </div>
           </button>
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-            Already have an account?{" "}
+          {t('doNotHaveAnAccountYet')}?{" "}
             <a
-              href="#"
+              href="/register"
               className="font-medium text-primary-600 hover:underline dark:text-primary-500"
             >
-              Login here
+              {t('registerHere')}
             </a>
           </p>
           <DropDown/>

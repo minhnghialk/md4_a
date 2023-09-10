@@ -1,7 +1,9 @@
 import './navbar.scss'
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { AiOutlineLogin } from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
 import { AiOutlineShopping } from "react-icons/ai";
+
 
 export default function Navbar() {
     return (
@@ -44,7 +46,7 @@ export default function Navbar() {
 
                 <div>
                 <form>
-  <label
+  {/* <label
     htmlFor="default-search"
     className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
   >
@@ -80,7 +82,7 @@ export default function Navbar() {
     >
       Search
     </button>
-  </div>
+  </div> */}
 </form>
 
                 </div>
@@ -125,6 +127,9 @@ export default function Navbar() {
                                 </div>
                             </a>
                         </li>
+
+                        <AiOutlineLogout/>
+
                         <li>
                             <a
                                 href="#"

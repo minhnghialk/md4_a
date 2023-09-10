@@ -1,0 +1,53 @@
+.a {
+  width: 500px;
+  margin-left: 450px;
+}
+
+/* Định dạng cho select box */
+select[name='categoryId'] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Định dạng cho input file */
+input[type='file'] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+/* Định dạng cho hình ảnh */
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 5px;
+}
+
+/* Định dạng cho nút "Add" */
+button[type='submit'] {
+  display: block;
+  margin: 0px auto;
+  padding: 5px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Định dạng cho nền của div chứa hình ảnh */
+div > div {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}

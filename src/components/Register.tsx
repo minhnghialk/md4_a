@@ -1,11 +1,11 @@
-import React, { memo, FormEvent, useState } from 'react'
+import { memo, FormEvent, useState } from 'react'
 import './user.scss'
 import api from '@/services/apis'
 import DropDown from '@components/DropDown'
 import { useTranslation } from 'react-i18next'
 import Loading from '@components/Loading'
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin, message, Modal } from 'antd';
+import { Spin, Modal } from 'antd';
 
 const Register = () =>{
   const [load, setLoad] = useState(false);
@@ -23,7 +23,39 @@ const Register = () =>{
 
   async function register(event: FormEvent) {
     event.preventDefault();
+    console.log((event.target as any).userName.value)
+    const userName = (event.target as any).userName.value
+    const email = (event.target as any).email.value
+    const password = (event.target as any).password.value
+    const firstName = (event.target as any).firstName.value
+    const lastName = (event.target as any).lastName.value
+    if (userName === '' || email === '' || password === '' || firstName === '' || lastName === '') {
+      alert('Please fill all fields')
+    }
+    if (userName.length < 3) {
+      alert('User name must be at least 3 characters or more')
+    }
+    // if (email.length >= 3) {
+    //   alert('Invalid email address')
+    // }
+    else if (password.length < 6) {
+      alert('Your password must be at least 6 characters or more')
+    }
+
+    function isValidEmail(email: string): boolean {
+      // Sử dụng biểu thức chính quy để kiểm tra địa chỉ email
+      var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      
+      // Sử dụng test() để kiểm tra xem địa chỉ email có hợp lệ hay không
+      return emailPattern.test(email);
+    }
+    
+    if (!isValidEmail(email)) {
+      alert("Invalid email address");
+    }
+    
     if(load) return
+    
     let newUser = {
       email: (event.target as any).email.value,
       userName: (event.target as any).userName.value,
@@ -33,6 +65,7 @@ const Register = () =>{
     }
     // let result = await api.userApi.register(newUser);  
     // console.log(result);
+
     setLoad(true)
         await api.userApi.register(newUser)
         .then(res => {
@@ -49,6 +82,7 @@ const Register = () =>{
             }
         })
         .catch(err => {
+          console.log("err", err);
             Modal.success({
                 content: "Sập server!",
                 okText: "thử lại"
@@ -62,17 +96,18 @@ const Register = () =>{
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
-  <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+  <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0" style={{height: '100%'}}>
     <a
       href="#"
       className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
     >
       <img
         className="w-8 h-8 mr-2"
-        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+        src="https://ruoutaychinhhang.com/userfiles/images/logo.png"
         alt="logo"
+        style={{width: '300px'}}
       />
-      ABC Store
+      {/* ABC Store */}
     </a>
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -85,14 +120,14 @@ const Register = () =>{
               htmlFor="text"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              User name
+              {t('userName')}
             </label>
             <input
               type="text"
               name="userName"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="User name"
-            />
+            /> 
           </div>
           <div>
             <label
@@ -113,7 +148,7 @@ const Register = () =>{
               htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Password
+              {t('passWord')}
             </label>
             <input
               type="password"
@@ -127,7 +162,7 @@ const Register = () =>{
               htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Confirm password
+              {t('confirmPassword')}
             </label>
             <input
               type="password"
@@ -142,7 +177,7 @@ const Register = () =>{
               htmlFor="text"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              First name
+              {t('firstName')}
             </label>
             <input
               type="firstName"
@@ -156,7 +191,7 @@ const Register = () =>{
               htmlFor="text"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Last name
+              {t('lastName')}
             </label>
             <input
               type="lastName"
@@ -180,12 +215,12 @@ const Register = () =>{
                 htmlFor="terms"
                 className="font-light text-gray-500 dark:text-gray-300"
               >
-                I accept the{" "}
+                {t('iAccept')}{" "}
                 <a
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   href="#"
                 >
-                  Terms and Conditions
+                   {t('theTermsAndConditions')}
                 </a>
               </label>
             </div>
@@ -199,18 +234,18 @@ const Register = () =>{
             className="{`${load && 'active'} btn_submit w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             // style = {{backgroundColor: "blue"}}
           >
-            Create an account
+            {t('createAnAccount')}
             <div className='btn_loading'>
               <Spin indicator={antIcon} />
             </div>
           </button>
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-            Already have an account?{" "}
+          {t('alreadyHaveAnAccount')}?{" "}
             <a
-              href="#"
+              href="/login"
               className="font-medium text-primary-600 hover:underline dark:text-primary-500"
             >
-              Login here
+              {t('loginHere')}
             </a>
           </p>
           <DropDown/>
