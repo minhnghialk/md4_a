@@ -26,6 +26,8 @@ export default function ProductList() {
   const [originalProducts, setOriginalProducts] = useState<Product[]>([]); // Lưu trữ danh sách sản phẩm gốc
     const [products, setProducts] = useState<Product[]>([]);
     const [searchTerm, setSearchTerm] = useState(""); // Thêm state để lưu trữ từ khóa tìm kiếm
+    const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
+    const [visibleCount, setVisibleCount] = useState<number>(1); // Ban đầu hiển thị 1 sản phẩm
 
     useEffect(() => {
         api.productApi.findMany()
@@ -36,9 +38,19 @@ export default function ProductList() {
             console.log(res.data.data);
             setOriginalProducts(res.data.data); // Lưu trữ danh sách sản phẩm gốc
             setProducts(res.data.data)
+            setVisibleProducts(res.data.data.slice(0, visibleCount));
           }
         })
       }, [])
+
+      const handleLoadMore = () => {
+        // Tăng số lượng sản phẩm hiển thị thêm khi nhấn "Load more"
+        const newVisibleCount = visibleCount + 1; // Tăng lên 1 sản phẩm, bạn có thể điều chỉnh số lượng tùy ý.
+        setVisibleCount(newVisibleCount);
+    
+        // Hiển thị thêm sản phẩm từ danh sách đã có
+        setVisibleProducts(products.slice(0, newVisibleCount));
+      }
 
       function handleAddToCart(productId: string) {
         let carts: CartItem[] = JSON.parse(localStorage.getItem("carts") ?? "[]");
@@ -134,7 +146,7 @@ export default function ProductList() {
       </div>
 
 
-        {products.map(product => 
+        {visibleProducts.map(product => 
       <a
         href="#"
         className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -180,7 +192,7 @@ export default function ProductList() {
         
       </a>
       )}
-      {/* <button style={{border: '1px solid black', width: '100px', height: '50px', margin: '5% 45%'}} onClick={handleLoadMore}>Load more</button> */}
+      <button style={{border: '1px solid black', width: '100px', height: '50px', margin: '5% 45%'}} onClick={handleLoadMore}>Load more</button>
       
     </div>
     
