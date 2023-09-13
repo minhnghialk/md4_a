@@ -27,7 +27,7 @@ export default function ProductList() {
     const [products, setProducts] = useState<Product[]>([]);
     const [searchTerm, setSearchTerm] = useState(""); // Thêm state để lưu trữ từ khóa tìm kiếm
     const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
-    const [visibleCount, setVisibleCount] = useState<number>(1); // Ban đầu hiển thị 1 sản phẩm
+    const [visibleCount, setVisibleCount] = useState<number>(3); // Ban đầu hiển thị 3 sản phẩm
 
     useEffect(() => {
         api.productApi.findMany()
@@ -45,7 +45,7 @@ export default function ProductList() {
 
       const handleLoadMore = () => {
         // Tăng số lượng sản phẩm hiển thị thêm khi nhấn "Load more"
-        const newVisibleCount = visibleCount + 1; // Tăng lên 1 sản phẩm, bạn có thể điều chỉnh số lượng tùy ý.
+        const newVisibleCount = visibleCount + 3; // Tăng lên 3 sản phẩm, bạn có thể điều chỉnh số lượng tùy ý.
         setVisibleCount(newVisibleCount);
     
         // Hiển thị thêm sản phẩm từ danh sách đã có
@@ -67,6 +67,7 @@ export default function ProductList() {
                 if(item.productId == productId) {
                     item.quantity += 1
                     flag = true;
+                    window.location.href="http://localhost:5173/cart"
                 }
                 return item
             })
@@ -104,14 +105,14 @@ export default function ProductList() {
     });
 
     // Cập nhật danh sách sản phẩm hiển thị
-    setProducts(filteredProducts);
+    setVisibleProducts(filteredProducts);
   }
 
 
 
   return (
     <div>
-        <h1 style={{textAlign: 'center', fontSize: '1.5em'}}>New Product List</h1>
+        <h1 style={{textAlign: 'center', fontSize: '1.5em', fontFamily: 'Comic Sans MS', marginTop: '5px'}}>New Products List</h1>
         <img
             src="https://web.nvnstatic.net/tp/T0295/img/seperate-icon.png?v=2"
             style={{marginLeft: '46%', marginTop: '5px'}}
@@ -192,7 +193,10 @@ export default function ProductList() {
         
       </a>
       )}
-      <button style={{border: '1px solid black', width: '100px', height: '50px', margin: '5% 45%'}} onClick={handleLoadMore}>Load more</button>
+      <button style={{border: '1px solid black', width: '140px', height: '40px', margin: '5% 45%', borderRadius: '5px'}} onClick={handleLoadMore}>
+        Load more
+        <span> &gt;&gt;</span>
+        </button>
       
     </div>
     

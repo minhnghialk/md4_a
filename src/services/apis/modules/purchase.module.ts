@@ -19,4 +19,17 @@ export default {
         }
         return await axios.post(import.meta.env.VITE_SV_HOST + "purchase/order-history", body)
     },
+    addOrder:async function(token:any,data:any) {
+        return await axios.post(import.meta.env.VITE_SV_HOST + "purchase/create-order", {
+            token,
+            data
+        })
+    },
+    getOrder:async function(token:any) {
+        return await axios.post(import.meta.env.VITE_SV_HOST + "purchase/get-order", {
+            token,
+
+        })
+    },
+
 }

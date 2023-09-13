@@ -4,7 +4,6 @@ import './cart.scss'
 import { AiOutlineMinus } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
-import { AiOutlineEdit } from "react-icons/ai";
 
 interface Product {
     id: string;
@@ -68,6 +67,7 @@ export default function Cart() {
         .then((res: { data: any; }) => {
             console.log("res", res.data)
         })
+        window.location.href="http://localhost:5173/purchase-order"
     }
 
 // Hàm thay đổi số lượng sản phẩm
@@ -116,7 +116,7 @@ const changeProductQuantity = (productId: string, changeAmount: number) => {
                 <td>
                     <img src={item.productDetail.avatar} style={{ width: "100px", height: "100px", borderRadius: "50%" }} />
                 </td>
-                <td>{item.productDetail.price}</td>
+                <td>{item.productDetail.price.toLocaleString('vi-VN')},000 VNĐ</td>
                 <td>
                     <span> <button onClick={() => changeProductQuantity(item.productId, -1)}> <AiOutlineMinus/> </button> </span>
                         {item.quantity}
@@ -124,7 +124,7 @@ const changeProductQuantity = (productId: string, changeAmount: number) => {
                 </td>
                 <td>
                     <span style={{cursor: 'pointer' }} onClick={() => deleteProductFromCart(item.productId)}><AiOutlineDelete/></span>
-                    <span style={{cursor: 'pointer' }}><AiOutlineEdit/></span>
+                    {/* <span style={{cursor: 'pointer' }}><AiOutlineEdit/></span> */}
                 </td>
             </tr>
         ))}

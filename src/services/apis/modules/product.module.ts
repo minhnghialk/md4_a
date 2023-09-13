@@ -14,4 +14,7 @@ export default {
     findById: async function(productId: string) {
         return await axios.get(import.meta.env.VITE_SV_HOST + "products/" + productId)
     },
+    deleteById: async function(productId: string) {
+        return await axios.delete(import.meta.env.VITE_SV_HOST + "products/" + productId)
+    },
 }

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './navbar.scss'
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { AiOutlineLogin } from "react-icons/ai";
@@ -5,7 +6,15 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { AiOutlineShopping } from "react-icons/ai";
 
 
+
 export default function Navbar() {
+    const [cartItemCount, setCartItemCount] = useState(0); // State để lưu số lượng sản phẩm trong giỏ hàng
+    useEffect(() => {
+        // Truy cập và lấy số lượng sản phẩm từ localStorage hoặc từ state của component Cart
+        const cart = JSON.parse(localStorage.getItem('carts') ?? '[]');
+        const itemCount = cart.reduce((total: any, item: { quantity: any; }) => total + item.quantity, 0);
+        setCartItemCount(itemCount);
+      }, []); // Khi component render lần đầu
     return (
         <nav className="bg-white border-gray-200 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -128,14 +137,30 @@ export default function Navbar() {
                             </a>
                         </li>
 
-                        <AiOutlineLogout/>
+                        {/* <AiOutlineLogout/> */}
 
                         <li>
                             <a
-                                href="#"
+                                href="http://localhost:5173/cart"
                                 className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                             >
                                 <AiOutlineShopping style={{ fontSize: '28px' }}/>
+                                {cartItemCount > 0 && (
+                                    <span
+                                        style={{
+                                        position: 'absolute',
+                                        top: '10px',
+                                        right: '75px',
+                                        background: 'red',
+                                        borderRadius: '50%',
+                                        padding: '2px 5px',
+                                        fontSize: '12px',
+                                        color: 'white',
+                                        }}
+                                    >
+                                        {cartItemCount}
+                                    </span>
+                                )}
                             </a>
                         </li>
                     </ul>

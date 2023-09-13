@@ -18,7 +18,7 @@ export default function Carousel() {
     {/* Item 2 */}
     <div className="duration-700 ease-in-out" data-carousel-item="">
       <img
-        src="https://rosestudio.com.vn/wp-content/uploads/2019/06/chụp-ảnh-sản-phẩm-rượu-10-2000x1500.jpg"
+        src="https://www.absolut.com/wp-content/uploads/product_absolut-vodka_atlas_global_16x7.jpg?imwidth=1200"
         className="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
         alt="..."
       />
@@ -34,7 +34,7 @@ export default function Carousel() {
     {/* Item 4 */}
     <div className="duration-700 ease-in-out" data-carousel-item="">
       <img
-        src="https://images.unsplash.com/photo-1529573164479-af78bbb26447?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80"
+        src="https://www.absolut.com/wp-content/uploads/absolut-home_16x7_.jpg?imwidth=1200"
         className="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
         alt="..."
       />
@@ -42,7 +42,7 @@ export default function Carousel() {
     {/* Item 5 */}
     <div className="duration-700 ease-in-out" data-carousel-item="">
       <img
-        src="https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2944&q=80"
+        src="https://www.absolut.com/wp-content/uploads/product-in-situ_absolut-100_1000ml_16x7_.jpg?imwidth=1200"
         className="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
         alt="..."
       />

@@ -88,6 +88,7 @@ export default function ProductsManagement() {
 
     window.alert("OK")
   }
+
   return (
     <div>
       <form onSubmit={(e) => {
